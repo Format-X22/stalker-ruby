@@ -35,6 +35,10 @@ mixin tab-simple(target, name)
         a(href='+'+target aria-controls=target role='tab' data-toggle='tab')
             span= name
 
+mixin tab-panel
+    .tab-pane(id=id)&attributes(attributes)
+        .container-fluid
+
 //- WINDOWS
 
 mixin window(id)

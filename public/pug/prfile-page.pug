@@ -18,11 +18,6 @@ mixin extra-info(id, text)
             |  -
             span(id=id)
 
-mixin profile-tab(id)
-    .tab-pane(id=id)&attributes(attributes)
-        .container-fluid
-            block
-
 mixin inventory(img)
     img.inventory(src='img/'+img)
 
@@ -41,7 +36,7 @@ mixin map-zone(id, x, y)
 
         .tab-content
 
-            +profile-tab('profile-info').active
+            +tab-panel('profile-info').active
                 .row
                     .col-md-12
                         +characteristic-large('chara-stamina', 'Выносливость')
@@ -60,7 +55,7 @@ mixin map-zone(id, x, y)
                     +extra-info('chara-duels', 'Успешных дуэлей')
                 .footer-spacer
 
-            +profile-tab('inventory')
+            +tab-panel('inventory')
                 .row
                     .col-md-6.col-sm-6.col-lg-4
                         h5 Броня
@@ -87,7 +82,7 @@ mixin map-zone(id, x, y)
                     .col-md-12
                         h5 Рюкзак
 
-            +profile-tab('map')
+            +tab-panel('map')
                 .row
                     .col-md-12
                         +map-zone('map-1',  890,  325)
@@ -121,7 +116,7 @@ mixin map-zone(id, x, y)
                         +map-zone('map-29', 475,  1670)
                         img.map src='img/map.jpg'
 
-            +profile-tab('shop')
+            +tab-panel('shop')
                 .row
                     .col-md-12
                         .h4.money-count
@@ -165,37 +160,39 @@ mixin map-zone(id, x, y)
                 .row.visible-xs
                     .col-md-12
                         .tab-content
-                            #shop-buy.tab-pane.active(role='tabpanel')
-                                +inventory('armor/zara.png')
-                                +inventory('weapon/akm.png')
-                                +inventory('weapon/pmm.png')
-                                +inventory('extra/knife.png')
-                                +inventory('extra/rgd5.png')
-                                +inventory('extra/rgd5.png')
-                                +inventory('extra/rgd5.png')
-                                +inventory('extra/dg5.png')
-                                +inventory('art/prusina.png')
-                                +inventory('art/vivert.png')
-                                +inventory('art/vspiska.png')
-                            #shop-sell.tab-pane(role='tabpanel')
-                                +inventory('armor/dolg_psz9d.png')
-                                +inventory('armor/koz.png')
-                                +inventory('extra/dg5.png')
-                                +inventory('weapon/fora.png')
-                                +inventory('weapon/fora-15.png')
-                                +inventory('weapon/ob_s.png')
-                                +inventory('extra/rgd5.png')
-                                +inventory('extra/dg5.png')
-                                +inventory('weapon/obrez.png')
-                                +inventory('weapon/sgi.png')
-                                +inventory('weapon/spas.png')
+                            +tab-panel('shop-buy').active
+                                .row
+                                    +inventory('armor/zara.png')
+                                    +inventory('weapon/akm.png')
+                                    +inventory('weapon/pmm.png')
+                                    +inventory('extra/knife.png')
+                                    +inventory('extra/rgd5.png')
+                                    +inventory('extra/rgd5.png')
+                                    +inventory('extra/rgd5.png')
+                                    +inventory('extra/dg5.png')
+                                    +inventory('art/prusina.png')
+                                    +inventory('art/vivert.png')
+                                    +inventory('art/vspiska.png')
+                            +tab-panel('shop-sell')
+                                .row
+                                    +inventory('armor/dolg_psz9d.png')
+                                    +inventory('armor/koz.png')
+                                    +inventory('extra/dg5.png')
+                                    +inventory('weapon/fora.png')
+                                    +inventory('weapon/fora-15.png')
+                                    +inventory('weapon/ob_s.png')
+                                    +inventory('extra/rgd5.png')
+                                    +inventory('extra/dg5.png')
+                                    +inventory('weapon/obrez.png')
+                                    +inventory('weapon/sgi.png')
+                                    +inventory('weapon/spas.png')
 
-            +profile-tab('pvp')
+            +tab-panel('pvp')
                 .row
                     .col-12-m
                         p pvp
 
-            +profile-tab('chat')
+            +tab-panel('chat')
                 .row
                     .col-12-m
                         p chat
