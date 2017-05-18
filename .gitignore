@@ -1,1 +1,7 @@
 .idea
+views/*.html
+!views/main-page.html
+!views/news-page.html
+!views/respect-page.html
+!views/profile-page.html
+!views/game-page.html
