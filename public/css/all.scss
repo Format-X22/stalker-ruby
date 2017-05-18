@@ -1,0 +1,177 @@
+.login-form {
+	input, button {
+		margin-left: 5px;
+	}
+}
+
+html,
+body,
+.main-container,
+.main-container > .row,
+.main-container > .row > div,
+.profile-container,
+.profile-inner {
+	height: 100%;
+}
+
+.footer-spacer {
+	width: 100%;
+	height: 20px;
+}
+
+.profile-container .tab-content {
+	height: calc(100% - 43px);
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+}
+
+.preloader {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 10000;
+	background-color: rgba(0, 0, 0, 0.5);
+
+	img {
+		width: 100%;
+		height: 100%;
+		padding: 10%;
+		animation: loadingIndicator 10s ease-out;
+	}
+}
+
+@keyframes loadingIndicator {
+	0% {
+		transform: rotate(-365deg);
+	}
+	100% {
+		transform: rotate(365deg);
+	}
+}
+
+.main-container {
+	padding-top: 52px;
+}
+
+.chat-container {
+	border-left: 1px solid black;
+}
+
+.chat {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+	.list {
+		flex: 1;
+		padding-top: 20px;
+	}
+
+	.msg-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 146px;
+		overflow: scroll;
+		-webkit-overflow-scrolling: touch;
+		padding: 20px;
+	}
+
+	.send-form {
+		padding-bottom: 20px;
+
+		.send {
+			padding: 5px 0;
+			display: flex;
+
+			.spacer {
+				flex: 1;
+			}
+		}
+	}
+}
+
+.information {
+	padding: 50px;
+
+	.logo {
+		width: 300px;
+		height: 300px;
+		position: absolute;
+		bottom: 70px;
+		left: 70px;
+	}
+}
+
+img {
+	&.inventory {
+		width: 250px;
+		height: 250px;
+		margin: 10px;
+		display: inline-block;
+		cursor: pointer;
+	}
+
+	&.map {
+		width: 100%;
+	}
+}
+
+@media (max-width:480px) {
+	.main-inne-container {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	img.map {
+		width: 300%;
+	}
+}
+
+.map-zone {
+	border: 2px solid #272b30;
+	background-color: rgba(36, 158, 3, 0.2);
+	cursor: pointer;
+
+	&:hover {
+		background-color: rgba(36, 158, 3, 0.5);
+	}
+
+	&.closed {
+		background-color: rgba(158, 0, 10, 0.2);
+
+		&:hover {
+			background-color: rgba(158, 0, 10, 0.5);
+		}
+	}
+
+	&.current:before {
+		content: ' ';
+		display: block;
+		width: 0;
+		height: 0;
+		background-color: black;
+		border: 5px solid rgb(50, 199, 3);
+		border-radius: 5px;
+		margin-top: 45%;
+		margin-left: 45%;
+		animation: currentLocation 2.5s ease-out infinite;
+	}
+}
+
+@keyframes currentLocation {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(4);
+		opacity: 0;
+	}
+}
+
+.money-count {
+	margin-top: 20px;
+	margin-left: 20px;
+}
