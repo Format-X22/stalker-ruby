@@ -6,17 +6,42 @@ require 'active_record'
 require_relative 'model/User'
 require_relative 'controller/Auth'
 require_relative 'controller/Chat'
+require_relative 'controller/Profile'
 require_relative 'controller/Game'
-require_relative 'controller/Io'
-require_relative 'controller/Pages'
-require_relative 'controller/Map'
-require_relative 'controller/Shop'
 
 ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'postgres://localhost/stalker-ruby')
 
-$public_routes = {
-	'/': 'GET',
-	'/api/chat': 'GET',
-	'/api/sing-in': 'POST',
-	'/api/pass': 'POST'
-}
+helpers do
+	def page(path)
+		File.read "views/#{path}-page.html"
+	end
+
+	def success
+		halt 200, {success: true}.to_json
+	end
+
+	def failure(message='Неизвестная ошибка')
+		halt 200, {success: false, message: message}.to_json
+	end
+end
+
+
+get '/' do
+	page 'main'
+end
+
+get '/news' do
+	page 'news'
+end
+
+get '/respect' do
+	page 'respect'
+end
+
+get '/profile' do
+	page 'profile'
+end
+
+get '/game' do
+	page 'game'
+end
