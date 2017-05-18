@@ -1,96 +1,86 @@
 class JS_Auth
 
 	def initialize
-		@login_top      = Element['#login-top']
-		@pass_top       = Element['#pass-top']
-		@login_register = Element['#login-register']
-		@pass_register  = Element['#pass-register']
-		@mail_register  = Element['#mail-register']
-		@login_modal    = Element['#login-modal']
-		@pass_modal     = Element['#pass-modal']
-		@sign_top       = Element['#sign-top']
-		@sign_modal     = Element['#sign-modal']
-		@register       = Element['#register']
-		@preloader      = Element['#preloader']
-		@error_modal    = Element['#error_modal']
-		@error_body     = Element['#error_body']
+		_ = Element
 
-		click @sign_top,   :sign_from_top
-		click @sign_modal, :sign_from_modal
-		click @register,   :register
+		@login_top      = _['#login-top']
+		@pass_top       = _['#pass-top']
+		@sign_top       = _['#sign-top']
 
-		enter_key @login_top,      :sign_from_top
-		enter_key @pass_top,       :sign_from_top
-		enter_key @login_modal,    :sign_from_modal
-		enter_key @pass_modal,     :sign_from_modal
-		enter_key @login_register, :register
-		enter_key @pass_register,  :register
-		enter_key @mail_register,  :register
+		@login_modal    = _['#login-modal']
+		@pass_modal     = _['#pass-modal']
+		@sign_modal     = _['#sign-modal']
+		@sign_window    = _['#sign-window']
 
-		change @login_top,      :validate_login
-		change @pass_top,       :validate_pass
-		change @login_modal,    :validate_login
-		change @pass_modal,     :validate_pass
-		change @login_register, :validate_login
-		change @pass_register,  :validate_pass
-		change @mail_register,  :validate_mail
+		@login_register  = _['#login-register']
+		@pass_register   = _['#pass-register']
+		@mail_register   = _['#mail-register']
+		@register        = _['#register']
+		@register_window = _['#register-window']
+
+		@loader         = _['#loader']
+		@error_modal    = _['#error_modal']
+		@error_body     = _['#error_body']
+
+		click     @sign_top,   :sign_from_top
+		actions   @login_top,  :validate_login, :sign_from_top
+		actions   @pass_top,   :validate_pass,  :sign_from_top
+
+		click   @sign_modal,  :sign_from_modal
+		actions @login_modal, :validate_login, :sign_from_modal
+		actions @pass_modal,  :validate_pass,  :sign_from_modal
+
+		click   @register,       :register
+		actions @login_register, :validate_login, :register
+		actions @pass_register,  :validate_pass,  :register
+		actions @mail_register,  :validate_mail,  :register
 	end
 
 	def sign_from_top
-		return unless validate_login(@login_top) or validate_pass(@pass_top)
-
-		sign(@login_top, @pass_top) do
-			to_profile
+		if validate_sign
+			sign(@login_top, @pass_top) do
+				to_profile
+			end
 		end
 	end
 
 	def sign_from_modal
-		return unless validate_login(@login_modal) or validate_pass(@pass_modal)
-
-		sign(@login_modal, @pass_modal) do
-			Element['#sign-modal'].modal('hide')
-			to_profile
+		if validate_sign_modal
+			sign(@login_modal, @pass_modal) do
+				@sign_window.modal('hide')
+				to_profile
+			end
 		end
 	end
 
 	def register_from_modal
-		return unless validate_login(@login_register) or validate_pass(@pass_register) or validate_mail(@mail_register)
-
-		register(@login_register, @pass_register, @mail_register) do
-			Element['#register-modal'].modal('hide')
-			to_profile
+		if validate_register
+			register(@login_register, @pass_register, @mail_register) do
+				@register_window.modal('hide')
+				to_profile
+			end
 		end
 	end
 
 	def sign(login, pass, &callback)
-		request = HTTP.post('/api/sign-in', payload: {
+		auth_action({
 			login: login.value,
 			pass:  pass.value
-		})
-
-		request.callback do |response|
-			hide_preloader
-
-			result = response.json
-
-			if result.success
-				callback.call
-			else
-				show_error_modal(result.message)
-			end
-		end
-
-		handle_request_error(request)
+		}, callback)
 	end
 
 	def register(login, pass, mail)
-		show_preloader
-
-		HTTP.post('/api/register', payload: {
+		auth_action({
 			login: login.value,
 			pass:  pass.value,
 			mail:  mail.value
-		})
+		}, callback)
+	end
+
+	def auth_action(data, callback)
+		show_preloader
+
+		request = HTTP.post('/api/register', payload: data)
 
 		request.callback do |response|
 			hide_preloader
@@ -104,10 +94,6 @@ class JS_Auth
 			end
 		end
 
-		handle_request_error(request)
-	end
-
-	def handle_request_error(request)
 		request.errback do |response|
 			hide_preloader
 			show_error_modal(response.message)
@@ -118,45 +104,55 @@ class JS_Auth
 		Window.location.href = '/profile'
 	end
 
+	def actions(field, on_change, on_enter)
+		field.on :change do
+			self.send(on_change, field)
+		end
+
+		field.on :keypress do |event|
+			if event.which == 13
+				self.send(on_enter, field)
+			end
+		end
+	end
+
 	def click(field, method_sym)
 		field.on :click do
 			self.send(method_sym, field)
 		end
 	end
 
-	def enter_key(field, method_sym)
-		field.on :keypress do |event|
-			if event.which == 13
-				self.send(method_sym, field)
-			end
-		end
+	def validate_sign
+		validate_login(@login_top) and validate_pass(@pass_top)
 	end
 
-	def change(field, method_sym)
-		field.on :change do
-			self.send(method_sym, field)
-		end
+	def validate_sign_modal
+		validate_login(@login_modal) and validate_pass(@pass_modal)
+	end
+
+	def validate_register
+		validate_login(@login_register) and validate_pass(@pass_register) and validate_mail(@mail_register)
 	end
 
 	def validate_login(field)
-		validate_field(field) do |value|
-			value.length > 2 and value.length < 100
+		validate(field) do |value|
+			(2..100) === value.length
 		end
 	end
 
 	def validate_pass(field)
-		validate_field(field) do |value|
-			value.length >= 8 && value.length < 100
+		validate(field) do |value|
+			(8..100) === value.length
 		end
 	end
 
 	def validate_mail(field)
-		validate_field(field) do |value|
-			value.length >= 6 && value.length < 100
+		validate(field) do |value|
+			(6..100) === value.length
 		end
 	end
 
-	def validate_field(field, &cond)
+	def validate(field, &cond)
 		value = field.value
 		wrap = field.parent('.form-group')
 		feedback = wrap.children('.form-control-feedback')
@@ -175,11 +171,11 @@ class JS_Auth
 	end
 
 	def show_preloader
-		@preloader.remove_class('hidden')
+		@loader.remove_class('hidden')
 	end
 
 	def hide_preloader
-		@preloader.add_class('hidden')
+		@loader.add_class('hidden')
 	end
 
 	def show_error_modal(text)
