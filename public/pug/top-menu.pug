@@ -1,0 +1,13 @@
+nav.navbar.navbar-default.navbar-fixed-top
+    .navbar-header
+        .navbar-brand Stalker EXT
+    .navbar-collapse.collapse.navbar-responsive-collapse
+        ul.nav.navbar-nav
+            +menu-item('/', 'Главная')
+            +menu-item('/news', 'Новости')
+            +menu-item('/respect', 'Благодарности')
+        .login-form.navbar-form.navbar-right.hidden-sm
+            +input('login-top', 'text', 'Логин')
+            +input('pass-top', 'password', 'Пароль')
+            +button('sign-top', 'Войти')
+            +button('register-top', 'Регистрация')(data-toggle='modal' data-target='#register-modal')
