@@ -8,7 +8,7 @@ helpers do
 	end
 end
 
-post '/api/sign-in' do
+post '/api/auth/sign' do
 	content_type :json
 
 	model = User.find_by login: params['login'], pass: params['pass']
@@ -25,7 +25,7 @@ post '/api/sign-in' do
 	end
 end
 
-post '/api/register' do
+post '/api/auth/register' do
 	content_type :json
 
 	model = User.new login: params['login'], pass: params['pass'], mail: params['mail']
