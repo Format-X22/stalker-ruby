@@ -2,8 +2,10 @@ require 'slim'
 require 'sinatra'
 require 'sinatra/contrib'
 require 'active_record'
+require 'active_support'
 
 require_relative 'model/User'
+require_relative 'model/Message'
 require_relative 'controller/Auth'
 require_relative 'controller/Chat'
 require_relative 'controller/Profile'
@@ -16,8 +18,8 @@ helpers do
 		File.read "views/#{path}-page.html"
 	end
 
-	def success
-		halt 200, {success: true}.to_json
+	def success(data = {})
+		halt 200, {success: true, data: data}.to_json
 	end
 
 	def failure(message='Неизвестная ошибка')
