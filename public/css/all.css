@@ -85,7 +85,7 @@ img.map {
   width: 100%; }
 
 @media (max-width: 480px) {
-  .main-inne-container {
+  .mobile-no-padding, .main-inner-container {
     padding-left: 0;
     padding-right: 0; }
 

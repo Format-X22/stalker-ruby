@@ -28,17 +28,18 @@ mixin tab(target, name, icon)
 
 mixin tab-mobile(target, icon)
     li.visible-xs(role='presentation')&attributes(attributes)
-        a(href=target aria-controls=icon role='tab' data-toggle='tab')
+        a(href='#'+target aria-controls=target role='tab' data-toggle='tab')
             span.glyphicon(class='glyphicon-'+icon)
 
 mixin tab-simple(target, name)
     li(role='presentation')&attributes(attributes)
-        a(href='+'+target aria-controls=target role='tab' data-toggle='tab')
+        a(href='#'+target aria-controls=target role='tab' data-toggle='tab')
             span= name
 
-mixin tab-panel
+mixin tab-panel(id)
     .tab-pane(id=id)&attributes(attributes)
         .container-fluid
+            block
 
 //- WINDOWS
 

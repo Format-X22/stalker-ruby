@@ -11,7 +11,7 @@ mixin characteristic(id, name)
 mixin characteristic-large(id, name)
     h4= name
     .progress
-        +chcharacteristic-bar.progress-bar-info(id=id)
+        +characteristic-bar.progress-bar-info(id=id)
 
 mixin extra-info(id, text)
     .col-md-3.text-center
@@ -35,7 +35,7 @@ block content
             ul.nav.nav-tabs
                 +tab('profile-info', 'Профиль', 'user').active
                 +tab('inventory', 'Инвентарь', 'th-large')
-                +tab('th-large', 'Карта', 'map-marker')#map-tab-bar-button
+                +tab('map', 'Карта', 'map-marker')#map-tab-bar-button
                 +tab('pvp', 'Дуэль', 'screenshot')
                 +tab('shop', 'Магазин', 'ruble')
                 +tab-mobile('chat', 'globe')
@@ -65,7 +65,7 @@ block content
                     .row
                         .col-md-6.col-sm-6.col-lg-4
                             h5 Броня
-                            +inventory('armor / zara.png')
+                            +inventory('armor/zara.png')
                         .col-md-6.col-sm-6.col-lg-8
                             h5 Оружее
                             +inventory('weapon/akm.png')
@@ -90,7 +90,7 @@ block content
 
                 +tab-panel('map')
                     .row
-                        .col-md-12
+                        .col-md-12.mobile-no-padding
                             +map-zone('map-1',  890,  325)
                             +map-zone('map-2',  740,  350)
                             +map-zone('map-3',  790,  445)
@@ -132,7 +132,7 @@ block content
                     .row.visible-xs
                         .col-md-12
                             ul.nav.nav-tabs
-                                +tab-simple('shop-buy', 'Продать')
+                                +tab-simple('shop-buy', 'Продать').active
                                 +tab-simple('shop-sell', 'Купить')
 
                     .row.hidden-xs

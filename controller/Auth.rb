@@ -28,6 +28,12 @@ end
 post '/api/auth/out' do
 	content_type :json
 
+	key = cookies[:session]
+
+	if key == nil or key.length == 0
+		failure 'Не верный ключ сессии'
+	end
+
 	model = User.find_by session: cookies[:session]
 
 	if model
