@@ -180,3 +180,16 @@ img {
 	margin-top: 20px;
 	margin-left: 20px;
 }
+
+.fun-profile {
+	width: 280px;
+	height: 280px;
+	display: block;
+	margin: 30px auto 0;
+}
+
+@media (max-height:1000px) {
+	.fun-profile {
+		display: none;
+	}
+}

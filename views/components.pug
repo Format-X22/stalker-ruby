@@ -71,14 +71,14 @@ mixin window-button-no-hide(id, text)
     +button(id, text)
 
 mixin window-button-ok(id)
-    +window-button(id, 'Ок')
+    +window-button(id+'-ok', 'Ок')
 
 mixin window-button-cancel(id)
-    +window-button(id, 'Отмена')
+    +window-button(id+'-cancel', 'Отмена')
 
-mixin window-buttons-dialog(id_ok, id_cancel)
-    +window-button-ok(id_ok)
-    +window-button-cancel(id_cancel)
+mixin window-buttons-dialog(id)
+    +window-button-ok(id)
+    +window-button-cancel(id)
 
 //- OTHER
 

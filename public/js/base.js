@@ -26,8 +26,8 @@ class Base {
     }
 
     click(field, callback) {
-        field.on('click', () => {
-            callback.call(this, field);
+        field.on('click', (event) => {
+            callback.call(this, field, event);
         })
     }
 

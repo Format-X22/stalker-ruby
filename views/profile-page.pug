@@ -13,18 +13,18 @@ mixin characteristic-large(id, name)
     .progress
         +characteristic-bar.progress-bar-info(id=id)
 
-mixin extra-info(id, text)
-    .col-md-3.text-center
+mixin extra-info(id, text, value)
+    .col-sm-6.col-lg-3.text-center
         .h5
             = text
             |  -
-            span(id=id)
+            span(id=id)= value
 
 mixin inventory(img)
     img.inventory(src='img/'+img)
 
 mixin map-zone(id, x, y)
-    .map-zone.hidden(id=id data-move=x+', '+y)
+    .map-zone.hidden(id=id data-move=x+', '+y)&attributes(attributes)
 
 block top-menu
     include game-menu
@@ -55,10 +55,13 @@ block content
                             +characteristic('chara-detect', 'Детектирование аномалий')
                             hr
                     .row
-                        +extra-info('chara-rate', 'Рейтинг сталкера')
-                        +extra-info('chara-money', 'Денег в наличии')
-                        +extra-info('chara-games', 'Успешных вылазок')
-                        +extra-info('chara-duels', 'Успешных дуэлей')
+                        +extra-info('chara-rate', 'Рейтинг сталкера', ' 1 500')
+                        +extra-info('chara-money', 'Денег в наличии', ' 10 000')
+                        +extra-info('chara-games', 'Успешных вылазок', ' 76')
+                        +extra-info('chara-duels', 'Успешных дуэлей', ' 7')
+                    .row.hidden-xs.hidden-sm
+                        .col-md-6.col-md-offset-3
+                            img.fun-profile(src='img/st-ext.svg')
                     .footer-spacer
 
                 +tab-panel('inventory')
@@ -91,8 +94,8 @@ block content
                 +tab-panel('map')
                     .row
                         .col-md-12.mobile-no-padding
-                            +map-zone('map-1',  890,  325)
-                            +map-zone('map-2',  740,  350)
+                            +map-zone('map-1',  890,  325).current
+                            +map-zone('map-2',  740,  350).closed
                             +map-zone('map-3',  790,  445)
                             +map-zone('map-4',  680,  455)
                             +map-zone('map-5',  760,  580)
@@ -120,7 +123,7 @@ block content
                             +map-zone('map-27', 655,  1520)
                             +map-zone('map-28', 375,  1650)
                             +map-zone('map-29', 475,  1670)
-                            img.map(src='img/map.jpg')
+                            img#profile-map.map(src='img/map.jpg')
 
                 +tab-panel('shop')
                     .row
@@ -202,3 +205,27 @@ block content
                     .row
                         .col-12-m
                             p chat
+
+    - var id = 'map-closed-zone-window'
+    +window(id)
+        +window-header(id, 'Переход к сектору локации')
+        +window-body(id)
+            p До этого сектора добраться сразу не получится, нужно подойти поближе через другие сектора.
+        +window-footer(id)
+            +window-button-ok(id)
+
+    - var id = 'map-go-window'
+    +window(id)
+        +window-header(id, 'Переход к сектору локации')
+        +window-body(id)
+            p Подтвердите переход.
+        +window-footer(id)
+            +window-buttons-dialog(id)
+
+    - var id = 'map-already-window'
+    +window(id)
+        +window-header(id, 'Переход к сектору локации')
+        +window-body(id)
+            p Вы сейчас в этой локации.
+        +window-footer(id)
+            +window-button-ok(id)
