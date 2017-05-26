@@ -1,0 +1,1 @@
+ opal -c opal/all.rb > public/js/all.js --gem jquery --gem opal-jquery --gem nokogiri
