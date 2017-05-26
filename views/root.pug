@@ -8,7 +8,7 @@ html(lang='ru')
         script(src='js/bootstrap.min.js')
         script(src='js/base.js')
         script(src='js/auth.js')
-        script(src='js/all.js')
+        script(src='js/main.js')
         link(href='css/theme.css' rel='stylesheet')
         link(href='css/all.css' rel='stylesheet')
         meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
@@ -21,7 +21,7 @@ html(lang='ru')
             img(src='img/st-ext.svg')
 
         .container-fluid
-            include top-menu
+            block top-menu
 
         .container-fluid.main-container
             .row
@@ -31,8 +31,9 @@ html(lang='ru')
                 .col-md-3.chat-container.hidden-xs.hidden-sm
                     include pc-chat
 
-        +window('error')
-            block title
-                | Ошибка
-            block footer
+        - var id = 'error'
+        +window(id)
+            +window-header(id, 'Ошибка')
+            +window-body(id)
+            +window-footer(id)
                 +window-button-ok('error-ok')

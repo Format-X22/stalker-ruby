@@ -25,6 +25,23 @@ post '/api/auth/sign' do
 	end
 end
 
+post '/api/auth/out' do
+	content_type :json
+
+	model = User.find_by session: cookies[:session]
+
+	if model
+		key = ''
+		model.session = key
+		model.save!
+
+		cookies[:session] = key
+		success
+	else
+		failure 'Ваша сессия была завершена ранее'
+	end
+end
+
 post '/api/auth/register' do
 	content_type :json
 

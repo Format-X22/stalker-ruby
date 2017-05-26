@@ -1,1 +1,97 @@
-<!DOCTYPE html><html lang="ru"><head><title>Stalker Ext</title><script src="js/jquery.js"></script><script src="js/bootstrap.min.js"></script><script src="js/base.js"></script><script src="js/auth.js"></script><script src="js/all.js"></script><link href="css/theme.css" rel="stylesheet"><link href="css/all.css" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#272b30"><meta name="msapplication-navbutton-color" content="#272b30"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></head><body><div class="loader hidden d" id="loader"><img src="img/st-ext.svg"></div><div class="container-fluid"><nav class="navbar navbar-default navbar-fixed-top"><div class="navbar-header"><div class="navbar-brand">Stalker EXT</div></div><div class="navbar-collapse collapse navbar-responsive-collapse"><ul class="nav navbar-nav"><li><a href="/">Главная</a></li><li><a href="/news">Новости</a></li><li><a href="/respect">Благодарности</a></li></ul><div class="login-form navbar-form navbar-right hidden-sm"><div class="form-group"><input class="form-control" id="login-top" type="text" placeholder="Логин"/><span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span></div><div class="form-group"><input class="form-control" id="pass-top" type="password" placeholder="Пароль"/><span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span></div><button class="btn btn-default" id="sign-top">Войти</button><button class="btn btn-default" id="register-top" data-toggle="modal" data-target="#register-modal">Регистрация</button></div></div></nav></div><div class="container-fluid main-container"><div class="row"><div class="col-md-9 main-inner-container"></div><div class="col-md-3 chat-container hidden-xs hidden-sm"><div class="chat"><div class="list"><div class="msg-container"><div class="well"><b>Nickname</b><p>Message....</p></div><div class="well"><b>Nickname</b><p>Message....</p></div><div class="well"><b>Nickname</b><p>Message....</p></div></div></div><div class="send-form"><textarea class="form-control" id="chat-input" rows="3"></textarea><div class="send"><div class="spacer"></div><button class="btn btn-default" id="chat-send">Отправить</button></div></div></div></div></div></div><div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="error-title"><div class="modal-dialog" role="dialog"><div class="modal-content"><div class="modal-header"><button class="close" type="button" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button><h4 id="error-title"></h4></div><div class="modal-body" id="error-body"></div><div class="modal-footer" id="error-footer"></div></div></div></div></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Stalker Ext</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/base.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <link href="css/theme.css" rel="stylesheet">
+    <link href="css/all.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="theme-color" content="#272b30">
+    <meta name="msapplication-navbutton-color" content="#272b30">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  </head>
+  <body>
+    <div class="loader hidden d" id="loader"><img src="img/st-ext.svg"></div>
+    <div class="container-fluid">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+          <button class="btn btn-default navbar-toggle collapsed" id="top-menu-toggle" data-toggle="collapse" data-target="#top-menu"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+          </button>
+          <div class="navbar-brand">Stalker EXT</div>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse" id="top-menu">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Главная</a></li>
+            <li><a href="/news">Новости</a></li>
+            <li><a href="/respect">Благодарности</a></li>
+          </ul>
+          <div class="login-form navbar-form navbar-right hidden-sm hidden-xs">
+            <div class="form-group">
+              <input class="form-control" id="login-top" type="text" placeholder="Логин"/><span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+            </div>
+            <div class="form-group">
+              <input class="form-control" id="pass-top" type="password" placeholder="Пароль"/><span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true"></span>
+            </div>
+            <button class="btn btn-default" id="sign-top">Войти
+            </button>
+            <button class="btn btn-default" id="register-top" data-toggle="modal" data-target="#register-window">Регистрация
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="container-fluid main-container">
+      <div class="row">
+        <div class="col-md-9 main-inner-container">
+        </div>
+        <div class="col-md-3 chat-container hidden-xs hidden-sm">
+          <div class="chat">
+            <div class="list">
+              <div class="msg-container">
+                <div class="well"><b>Nickname</b>
+                  <p>Message....</p>
+                </div>
+                <div class="well"><b>Nickname</b>
+                  <p>Message....</p>
+                </div>
+                <div class="well"><b>Nickname</b>
+                  <p>Message....</p>
+                </div>
+              </div>
+            </div>
+            <div class="send-form">
+              <textarea class="form-control" id="chat-input" rows="3"></textarea>
+              <div class="send">
+                <div class="spacer"></div>
+                <button class="btn btn-default" id="chat-send">Отправить
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="error-title">
+      <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-label="Закрыть"><span aria-hidden="true">&times;</span></button>
+            <h4 id="error-title">Ошибка
+            </h4>
+          </div>
+          <div class="modal-body" id="error-body">
+          </div>
+          <div class="modal-footer" id="error-footer">
+            <button class="btn btn-default" id="error-ok" data-dismiss="modal">Ок
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

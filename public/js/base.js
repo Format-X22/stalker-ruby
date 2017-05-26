@@ -5,6 +5,10 @@ class Base {
         this.errorBody  = $('#error_body');
     }
 
+    toMain() {
+        window.location.href = '/'
+    }
+
     toProfile() {
         window.location.href = '/profile'
     }

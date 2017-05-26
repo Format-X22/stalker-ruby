@@ -26,6 +26,9 @@ mixin inventory(img)
 mixin map-zone(id, x, y)
     .map-zone.hidden(id=id data-move=x+', '+y)
 
+block top-menu
+    include game-menu
+
 block content
     .container-fluid.profile-container
         .row.profile-inner

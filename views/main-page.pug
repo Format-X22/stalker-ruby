@@ -1,5 +1,8 @@
 extends root
 
+block top-menu
+    include top-menu
+
 block content
     .information
         h3.hidden-xs Stalker EXT - это пошаговая онлайн рпг
@@ -14,25 +17,21 @@ block content
             +button-show-modal('register-show', 'Войти', 'sign-window').btn-lg.visible-xs.visible-sm.btn-block
         img.logo.hidden-xs.hidden-sm(src='img/st-ext.svg')
 
-    +window('register-window')
-        block title
-            | Регистрация
-
-        block body
+    - var id = 'register-window'
+    +window(id)
+        +window-header(id, 'Регистрация')
+        +window-body(id)
             +input('mail-register', 'email', 'Почта')
             +input('login-register', 'text', 'Логин')
             +input('pass-register', 'password', 'Пароль')
-
-        block footer
+        +window-footer(id)
             +button('register', 'Зарегистрироваться')
 
-    +window('sign-window')
-        block title
-            | Вход
-
-        block body
+    - var id = 'sign-window'
+    +window(id)
+        +window-header(id, 'Вход')
+        +window-body(id)
             +input('login-modal', 'text', 'Логин')
             +input('pass-modal', 'password', 'Пароль')
-
-        block footer
+        +window-footer(id)
             +button('sign-modal', 'Войти')

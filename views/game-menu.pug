@@ -1,0 +1,9 @@
+nav.navbar.navbar-default.navbar-fixed-top
+    .navbar-header
+        +mobile-top-menu-toggle('top-menu-toggle')
+        .navbar-brand Stalker EXT
+    #top-menu.navbar-collapse.collapse.navbar-responsive-collapse
+        ul.nav.navbar-nav.visible-xs.visible-sm
+            +menu-item('#', 'Выйти')#sign-out-mobile
+        .navbar-form.navbar-right.hidden-sm.hidden-xs
+            +button('sign-out', 'Выйти')

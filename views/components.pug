@@ -2,6 +2,7 @@
 
 mixin button(id, text)
     button.btn.btn-default(id=id)&attributes(attributes)= text
+        block
 
 mixin button-show-modal(id, text, modal_id)
     +button(id, text)(data-toggle='modal' data-target='#'+modal_id)&attributes(attributes)
@@ -45,15 +46,22 @@ mixin window(id)
     .modal.fade(id=id tabindex='-1' role='dialog' aria-labelledby=id+'-title')
         .modal-dialog(role='dialog')
             .modal-content
-                .modal-header
-                    button.close(type='button' data-dismiss='modal' aria-label='Закрыть')
-                        span(aria-hidden='true') &times;
-                    h4(id=id+'-title')
-                        block title
-                .modal-body(id=id+'-body')
-                    block body
-                .modal-footer(id=id+'-footer')
-                    block footer
+                block
+
+mixin window-header(id, title)
+    .modal-header
+        button.close(type='button' data-dismiss='modal' aria-label='Закрыть')
+            span(aria-hidden='true') &times;
+        h4(id=id + '-title')
+            = title
+
+mixin window-body(id)
+    .modal-body(id=id + '-body')
+        block
+
+mixin window-footer(id)
+    .modal-footer(id=id + '-footer')
+        block
 
 mixin window-button(id, text)
     +button(id, text)(data-dismiss='modal')
@@ -71,3 +79,10 @@ mixin window-buttons-dialog(id_ok, id_cancel)
     +window-button-ok(id_ok)
     +window-button-cancel(id_cancel)
 
+//- OTHER
+
+mixin mobile-top-menu-toggle(id)
+    +button(id).navbar-toggle.collapsed(data-toggle='collapse' data-target='#top-menu')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
