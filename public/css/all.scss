@@ -124,8 +124,9 @@ img {
 		padding-right: 0;
 	}
 
-	.main-inner-container {
-		@extend .mobile-no-padding;
+	.mobile-break-padding {
+		margin-left: -30px;
+		margin-right: -30px;
 	}
 
 	img.map {
