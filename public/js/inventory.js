@@ -53,3 +53,5 @@ class Inventory extends Base {
         console.log(this.itemId);
     }
 }
+
+$(() => new Inventory());

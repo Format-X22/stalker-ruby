@@ -151,3 +151,5 @@ class Auth extends Base {
         });
     }
 }
+
+$(() => new Auth());

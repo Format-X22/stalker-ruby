@@ -7,12 +7,20 @@ mixin button(id, text)
 mixin button-show-modal(id, text, modal_id)
     +button(id, text)(data-toggle='modal' data-target='#'+modal_id)&attributes(attributes)
 
+mixin button-input(id, text)
+    span.input-group-btn
+        +button(id, text)&attributes(attributes)
+
 //- INPUTS
 
 mixin input(id, type, placeholder)
     .form-group&attributes(attributes)
         input.form-control(id=id type=type placeholder=placeholder)
         span.glyphicon.glyphicon-remove.form-control-feedback.hidden(aria-hidden='true')
+
+mixin input-outside-group(id, type, placeholder)
+    input.form-control(id=id type=type placeholder=placeholder)&attributes(attributes)
+    span.glyphicon.glyphicon-remove.form-control-feedback.hidden(aria-hidden='true')
 
 //- MENUS AND TABS
 

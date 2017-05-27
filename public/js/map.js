@@ -64,3 +64,5 @@ class Map extends Base {
         console.log(this.currentId);  // TODO
     }
 }
+
+$(() => new Map());

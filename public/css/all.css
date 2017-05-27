@@ -1,6 +1,9 @@
 .login-form input, .login-form button {
   margin-left: 5px; }
 
+.progress-bar {
+  cursor: pointer; }
+
 html,
 body,
 .main-container,
