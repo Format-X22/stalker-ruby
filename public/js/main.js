@@ -3,6 +3,7 @@ $(() => {
 
     if (~location.href.indexOf('/profile')) {
         new Map();
+        new Inventory();
     }
 });
 

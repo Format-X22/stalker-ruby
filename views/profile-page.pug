@@ -21,7 +21,7 @@ mixin extra-info(id, text, value)
             span(id=id)= value
 
 mixin inventory(img)
-    img.inventory(src='img/'+img)
+    img.inventory(src='img/'+img)&attributes(attributes)
 
 mixin map-zone(id, x, y)
     .map-zone.hidden(id=id data-move=x+', '+y)&attributes(attributes)
@@ -68,28 +68,31 @@ block content
                     .row
                         .col-md-6.col-sm-6.col-lg-4
                             h5 Броня
-                            +inventory('armor/zara.png')
+                            +inventory('armor/zara.png')(data-weapon='armor')
                         .col-md-6.col-sm-6.col-lg-8
                             h5 Оружее
-                            +inventory('weapon/akm.png')
-                            +inventory('weapon/pmm.png')
+                            +inventory('weapon/akm.png')(data-weapon='primary')
+                            +inventory('weapon/pmm.png')(data-weapon='secondary')
                     .row
                         .col-md-12
                             h5 Дополнительные предметы
-                            +inventory('extra/knife.png')
-                            +inventory('extra/rgd5.png')
-                            +inventory('extra/rgd5.png')
-                            +inventory('extra/rgd5.png')
-                            +inventory('extra/dg5.png')
+                            +inventory('extra/knife.png')(data-weapon='extra-1')
+                            +inventory('extra/rgd5.png')(data-weapon='extra-2')
+                            +inventory('extra/rgd5.png')(data-weapon='extra-3')
+                            +inventory('extra/rgd5.png')(data-weapon='extra-4')
+                            +inventory('extra/dg5.png')(data-weapon='extra-5')
                     .row
                         .col-md-12
                             h5 Активные артефакты
-                            +inventory('art/prusina.png')
-                            +inventory('art/vivert.png')
-                            +inventory('art/vspiska.png')
-                    .row
+                            +inventory('art/prusina.png')(data-weapon='art-1')
+                            +inventory('art/vivert.png')(data-weapon='art-2')
+                            +inventory('art/vspiska.png')(data-weapon='art-3')
+                    #bag.row
                         .col-md-12
-                            h5 Рюкзак 
+                            h5 Рюкзак
+                            +inventory('art/prusina.png')(data-weapon='i-1')
+                            +inventory('art/prusina.png')(data-weapon='i-2')
+                            +inventory('art/prusina.png')(data-weapon='i-3')
 
                 +tab-panel('map')
                     .row
@@ -206,6 +209,29 @@ block content
                         .col-12-m
                             p chat
 
+    - var id = 'inventory-active-item-window'
+    +window(id)
+        +window-header(id, 'Название')
+        +window-body(id)
+            p
+                img
+                span Описание.
+        +window-footer(id)
+            +window-button(id+'-remove', 'Убрать в рюкзак')
+            +window-button-ok(id)
+
+    - var id = 'inventory-passive-item-window'
+    +window(id)
+        +window-header(id, 'Название')
+        +window-body(id)
+            p
+                img
+                span Описание.
+        +window-footer(id)
+            +window-button(id + '-activate', 'Сделать активным')
+            +window-button-ok(id)
+
+                            
     - var id = 'map-closed-zone-window'
     +window(id)
         +window-header(id, 'Переход к сектору локации')
