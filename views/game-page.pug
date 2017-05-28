@@ -7,4 +7,122 @@ block top-menu
     include game-menu
 
 block content
-    
+    +characteristic-large('hp-bar', 'Здоровье', 'danger')
+    hr
+    table.table.table-bordered.game-board
+        tbody
+            tr
+                td#finish.opened
+                td
+                td
+                td
+                td
+                td
+                td
+                td
+            tr
+                td
+                td
+                td
+                td
+                td
+                td
+                td
+                td
+            tr
+                td
+                td
+                td
+                td
+                td
+                td
+                td
+                td
+            tr
+                td 
+                td
+                td
+                td
+                td
+                td
+                td
+                td
+            tr
+                td
+                td
+                td
+                td
+                td
+                td
+                td.near
+                td.near
+            tr
+                td
+                td
+                td
+                td
+                td
+                td
+                td.near
+                td.current.opened
+    #game-controls.pull-right
+        +button-group-radio
+            +button-group-radio-button-icon('strat-hide', 'Скрытно', 'eye-open')
+            +button-group-radio-button-icon('strat-war', 'Напролом', 'fire')
+            +button-group-radio-button-icon('strat-split', 'По обстоятельствам', 'leaf').active
+        | &nbsp;&nbsp;|&nbsp;
+        +button-icon('strat-info', 'question-sign')
+        | &nbsp;&nbsp;|&nbsp;
+        +button-with-icon('exit', 'Вернуться назад', 'home')
+
+    - var id = 'cells-closed-window'
+    +window(id)
+        +window-header(id, 'Далековато')
+        +window-body(id)
+            p.
+                Сразу пройти туда не видно вариантов, похоже придется подойти поближе.
+        +window-footer(id)
+            +window-button-ok(id)
+
+    - var id = 'hp-bar-window'
+    +window(id)
+        +window-header(id, 'Здоровье')
+        +window-body(id)
+            p.
+                Все умирают. Но тем не менее и все хотят жить... ну, или многие... Так или
+                иначе - здоровье сталкера - самое главное что у него есть. Отсутствие здоровья
+                это гибель на просторах Зоны. Каждая встреча с мутантом, каждая пуля, полученная
+                хоть и в бронекостюме - не прибавляет здоровья. Здоровье стоит беречь.
+            p.
+                После отдыха между вылазками в Зону здоровье восстанавливается, но во время
+                вылазки отдыхать негде, вокруг опасность, каждый раз следует оценивать
+                свои риски - возможно следующий шаг станет последним. И чем меньше здоровья -
+                тем выше этот шанс.
+        +window-footer(id)
+            +window-button-ok(id)
+        
+    - var id = 'strat-info-window'
+    +window(id)
+        +window-header(id, 'Стратегии')
+        +window-body(id)
+            +icon('eye-open')
+            p.
+                Стратегия скрытно передвигаться по Зоне имеет свои плюсы. Меньше встреч с мутантами
+                и противниками-людьми. А при необходимости можно расстрелять противника
+                из укрытия раньше чем он заметит откуда выстрелы. Ну и в случае обнаружения
+                можно быстро и незаметно скрыться.
+            hr
+            +icon('fire')
+            p.
+                Напролом с оружием на перевес - хорошая стратегия для тех кто хочет взять
+                инициативу в свои руки. Постоянная готовность к бою не даст противнику шансов
+                и позволит вести бой на много эффективнее.
+            hr
+            +icon('leaf')
+            p.
+                Иногда имеет смысл поступить так, иногда иначе. Ситуация может меняться и
+                тот кто быстрее к ней приспособится - тот и останется в живых. Стратегия
+                действия по обстоятельствам позволяет решать проблемы по мере их поступления
+                и так, как требует ситуация.
+        +window-footer(id)
+            +window-button-ok(id)

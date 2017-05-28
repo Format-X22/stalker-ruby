@@ -1,18 +1,5 @@
 extends root
 
-mixin characteristic-bar
-    .progress-bar.progress-bar-striped(role='progressbar' style='width: 100%')&attributes(attributes)
-
-mixin characteristic(id, name)
-    h6=name
-    .progress
-        +characteristic-bar()(id=id)
-
-mixin characteristic-large(id, name)
-    h4= name
-    .progress
-        +characteristic-bar().progress-bar-info(id=id)
-
 mixin extra-info(id, text, value)
     .col-sm-6.col-lg-3.text-center
         .h5

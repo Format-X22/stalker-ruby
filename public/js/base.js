@@ -61,4 +61,8 @@ class Base {
         this.errorBody.html(text);
         this.errorModal.modal('show');
     }
+
+    makeModalShower(target) {
+        return () => target.modal('show');
+    }
 }

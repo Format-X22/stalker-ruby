@@ -8,6 +8,15 @@
 	cursor: pointer;
 }
 
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+	outline: none;
+}
+
 html,
 body,
 .main-container,
@@ -195,5 +204,42 @@ img {
 @media (max-height:1000px) {
 	.fun-profile {
 		display: none;
+	}
+}
+
+.game-board {
+	td {
+		cursor: pointer;
+
+		&:hover {
+			background-color: #712620;
+		}
+
+		&.current {
+			background-color: #50555a;
+
+			&:before {
+				content: ' ';
+				display: block;
+				width: 0;
+				height: 0;
+				background-color: black;
+				border: 5px solid rgb(50, 199, 3);
+				border-radius: 5px;
+				margin-top: 35%;
+				margin-left: 45%;
+				animation: currentLocation 2.5s ease-out infinite;
+			}
+		}
+
+		&.opened {
+			background-color: #000000;
+		}
+
+		&.near {
+			&:hover {
+				background-color: #09711b;
+			}
+		}
 	}
 }

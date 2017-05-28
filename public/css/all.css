@@ -4,6 +4,14 @@
 .progress-bar {
   cursor: pointer; }
 
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+  outline: none; }
+
 html,
 body,
 .main-container,
@@ -140,5 +148,26 @@ img.map {
 @media (max-height: 1000px) {
   .fun-profile {
     display: none; } }
+.game-board td {
+  cursor: pointer; }
+  .game-board td:hover {
+    background-color: #712620; }
+  .game-board td.current {
+    background-color: #50555a; }
+    .game-board td.current:before {
+      content: ' ';
+      display: block;
+      width: 0;
+      height: 0;
+      background-color: black;
+      border: 5px solid #32c703;
+      border-radius: 5px;
+      margin-top: 35%;
+      margin-left: 45%;
+      animation: currentLocation 2.5s ease-out infinite; }
+  .game-board td.opened {
+    background-color: #000000; }
+  .game-board td.near:hover {
+    background-color: #09711b; }
 
 /*# sourceMappingURL=all.css.map */
