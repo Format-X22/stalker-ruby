@@ -2,7 +2,7 @@ require 'slim'
 require 'sinatra'
 require 'sinatra/contrib'
 require 'active_record'
-require 'active_support'
+require 'active_support/all'
 
 require_relative 'model/User'
 require_relative 'model/Message'
@@ -23,7 +23,7 @@ helpers do
 	end
 
 	def failure(message='Неизвестная ошибка')
-		halt 200, {success: false, message: message}.to_json
+		halt 200, {success: false, messages: message}.to_json
 	end
 end
 

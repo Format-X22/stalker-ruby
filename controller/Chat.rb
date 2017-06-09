@@ -2,78 +2,60 @@ require 'date'
 
 post '/api/chat/message' do
 	content_type :json
-	check_session request
+	check_session
 
 	user = User.find_by session: cookies[:session]
-	bat_to = user.chat_ban_to
+	ban_to = user.chat_ban_to
 
-	if bat_to > Time.now.to_time.to_i
-		failure "Вы не можете писать сообщения до #{Time.at(bat_to)}"
+	if ban_to and ban_to > Time.now
+		failure "Вы не можете писать сообщения до #{Time.at(ban_to).strftime('%d.%m.%Y %H:%M:%S')}"
 	end
 
-	message = Message.new user: user.id, text: params['text']
+	message = Message.new user_id: user.id.to_i, text: params[:text]
 
 	if message.valid?
 		message.save!
-		success
 	else
-		failure
+		failure 'Сообщение не верного формата'
 	end
+
+	text = message.text
+
+	if text[/^\/ban /]
+
+		unless %w[mod admin].include? user.role
+			failure 'Недостаточно прав'
+		end
+
+		login = text.split(' ')[1]
+
+		target = User.find_by login: login
+
+		unless target
+			failure 'Такого пользователя не существует'
+		end
+
+		target.chat_ban_to = 3.days.from_now
+		target.save!
+
+		Message.new(user_id: 1, text: ">>> Пользователь #{login} забанен на 3 дня").save!
+	end
+
+	success
 end
 
 post '/api/chat/list' do
 	content_type :json
-	check_session request
+	check_session
 
-	last = (params['last'] or 0).to_i
-	ids = Message.arel_table[:id]
+	count = Message.count
+	last = (params[:last] or 0).to_i
 
-	if last == 0
-		Message.last(30)
+	if last < Message.count - 30
+		last = count - 30
 	end
 
-	if last < Message.count - 300
-		failure 'Запрошено слишком много сообщений'
-	else
-		cond = ids.gt(last + 1)
+	cond = Message.arel_table[:id].gt(last)
 
-		success Message.where(cond).joins(:users).map do |message|
-			#TODO
-		end
-	end
-end
-
-post '/api/chat/remove' do
-	content_type :json
-	check_session request
-
-	user = User.find_by session: cookies[:session]
-
-	if %w[mod admin].include? user.role
-		Message.delete(params['id'].to_i)
-
-		success
-	else
-		failure 'Недостаточно прав для удаления сообщения'
-	end
-end
-
-post '/api/chat/ban' do
-	content_type :json
-	check_session request
-
-	user = User.find_by session: cookies[:session]
-
-	if %w[mod admin].include? user.role
-		target = User.find_by id: params['id']
-
-		Message.delete Message.where(id: target.id).map(:id)
-
-		target.chat_ban_to = Time.now.to_time.to_i + 3.days
-		target.save!
-
-		success
-	else
-		failure 'Недостаточно прав для удаления сообщения'
-	end
+	success Message.joins(:user).select(:id, :text, :login, :date).where(cond)
 end

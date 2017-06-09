@@ -3,8 +3,12 @@ helpers do
 		rand * rand * 1_000_000
 	end
 
-	def check_session(request)
-		# TODO
+	def check_session
+		user = User.find_by session: cookies[:session]
+
+		unless user
+			failure 'Не верный ключ сессии'
+		end
 	end
 end
 
