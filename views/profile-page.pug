@@ -30,9 +30,8 @@ block content
             ul.nav.nav-tabs
                 +tab('profile-info', 'Профиль', 'user').active
                 +tab('inventory', 'Инвентарь', 'th-large')
-                +tab('map', 'Карта', 'map-marker')#map-tab-bar-button
-                +tab('pvp', 'Дуэль', 'screenshot')
                 +tab('shop', 'Магазин', 'ruble')
+                +tab('map', 'Карта', 'map-marker')#map-tab-bar-button
                 +tab-mobile('chat', 'globe')
 
             .tab-content
@@ -53,7 +52,7 @@ block content
                         +extra-info('chara-rate', 'Рейтинг сталкера', ' 1 500')
                         +extra-info('chara-money', 'Денег в наличии', ' 10 000')
                         +extra-info('chara-games', 'Успешных вылазок', ' 76')
-                        +extra-info('chara-duels', 'Успешных дуэлей', ' 7')
+                        +extra-info('chara-duels', 'Успешных дуэлей', ' 0')
                     .row.hidden-xs.hidden-sm
                         .col-md-6.col-md-offset-3
                             img.fun-profile(src='img/st-ext.svg')
@@ -193,34 +192,6 @@ block content
                                         +inventory('weapon/obrez.png')
                                         +inventory('weapon/sgi.png')
                                         +inventory('weapon/spas.png')
-
-                +tab-panel('pvp')
-                    .row
-                        .col-md-6
-                            hr
-                            h4 Вызвать на дуэль
-                            hr
-                            .input-group
-                                +input-outside-group('pvp-call-name', 'text', 'Имя')
-                                +button-input('pvp-call-button', 'Вызвать')
-                        .col-md-6
-                            hr
-                            h4 Дуэли в этом секторе
-                            hr
-                            .well.text-center
-                                h5 Format-X22 против Jlesnik
-                                p Зрителей: 12
-                                p Ставки: 11 000 <-> 12 000
-                                p
-                                    +button('pvp-join-1', 'Посмотреть бой')
-                                    +button('pvp-bet-1',  'Сделать ставку')
-                            .well.text-center
-                                h5 Osk0lok против Dorian
-                                p Зрителей: 4
-                                p Ставки: 11 000 <-> 5 000
-                                p
-                                    +button('pvp-join-2', 'Посмотреть бой')
-                                    +button('pvp-bet-2',  'Сделать ставку')
 
                 +tab-panel('chat')
                     .row
