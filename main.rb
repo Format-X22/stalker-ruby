@@ -23,7 +23,7 @@ helpers do
 	end
 
 	def failure(message='Неизвестная ошибка')
-		halt 200, {success: false, messages: message}.to_json
+		halt 200, {success: false, message: message}.to_json
 	end
 end
 

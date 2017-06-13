@@ -2,7 +2,13 @@ class Chat extends Base {
     constructor() {
         super();
 
-        // TODO
+        this.loadMessages();
+    }
+
+    loadMessages(last) {
+        this.post('/api/chat/list', {last}, (response) => {
+            console.log(response);
+        });
     }
 }
 

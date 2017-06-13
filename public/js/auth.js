@@ -89,20 +89,9 @@ class Auth extends Base {
     }
 
     authAction(data, callback) {
-        this.showPreloader();
-
-        $.post(`/api/auth/${data.point}`, data)
-            .done(
-                (response) => {
-                    this.onSuccessAuthAction(response, callback);
-                }
-            )
-            .fail(
-                (response) => this.showErrorModal(response.message)
-            )
-            .always(
-                () => this.hidePreloader()
-            );
+        this.post(`/api/auth/${data.point}`, data, (response) => {
+            this.onSuccessAuthAction(response, callback);
+        });
     }
 
     onSuccessAuthAction(response, callback) {

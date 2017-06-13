@@ -1,8 +1,8 @@
 class Base {
     constructor() {
         this.loader     = $('#loader');
-        this.errorModal = $('#error_modal');
-        this.errorBody  = $('#error_body');
+        this.errorModal = $('#error');
+        this.errorBody  = $('#error-body');
     }
 
     toMain() {
@@ -64,5 +64,33 @@ class Base {
 
     makeModalShower(target) {
         return () => target.modal('show');
+    }
+
+    post(url, data, success, failure, always) {
+        this.showPreloader();
+
+        $.post(url, data)
+            .done(
+                (response) => {
+                    if (response.success) {
+                        success && success(response);
+                    } else {
+                        this.showErrorModal(response.message);
+                        failure && failure(response);
+                    }
+                }
+            )
+            .fail(
+                (response) => {
+                    this.showErrorModal('Сетевая ошибка');
+                    failure && failure(response, true);
+                }
+            )
+            .always(
+                () => {
+                    this.hidePreloader();
+                    always && always();
+                }
+            );
     }
 }
