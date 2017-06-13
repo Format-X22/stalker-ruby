@@ -77,6 +77,17 @@ body,
       .chat .send-form .send .spacer {
         flex: 1; }
 
+.mobile-chat-tab-panel {
+  height: 100%; }
+  .mobile-chat-tab-panel .container-fluid {
+    height: 100%; }
+    .mobile-chat-tab-panel .container-fluid .row {
+      height: 100%; }
+      .mobile-chat-tab-panel .container-fluid .row .mobile-chat-col {
+        height: 100%; }
+        .mobile-chat-tab-panel .container-fluid .row .mobile-chat-col .msg-container {
+          bottom: 60px; }
+
 .information {
   padding: 50px; }
   .information .logo {

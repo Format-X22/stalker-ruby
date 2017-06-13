@@ -3,12 +3,12 @@ class Chat extends Base {
         super();
 
         this.pcChat = $('#pc-chat');
-        this.mobileChat = null;
+        this.mobileChat = $('#mobile-chat');
 
         this.last = 0;
         this.syncMessages();
 
-        setInterval(this.syncMessages.bind(this), 1500);
+        setInterval(this.syncMessages.bind(this), 2000);
     }
 
     syncMessages() {
@@ -34,17 +34,25 @@ class Chat extends Base {
                     
                     return item.toString();
                 });
-                const dateFormat = `${dateItems[0]}:${dateItems[1]}:${dateItems[2]} ${dateItems[3]}.${dateItems[4]}`;
-
-                this.pcChat.append(`
-                    <span class="label label-default pull-right">${dateFormat}</span>
+                const dateFormatShort = `${dateItems[0]}:${dateItems[1]}:${dateItems[2]}`;
+                const dateFormat = `${dateFormatShort} ${dateItems[3]}.${dateItems[4]}`;
+                const template = `
                     <div class="well">
                         <b>${message.login}</b>
                         <p>${message.text}</p>
                     </div>
+                `;
+
+
+                this.pcChat.append(`
+                    <span class="label label-default pull-right">${dateFormat}</span>
+                    ${template}
                 `);
 
-                this.mobileChat // TODO
+                this.mobileChat.append(`
+                    <span class="label label-default pull-right">${dateFormatShort}</span>
+                    ${template}
+                `);
             });
         }, null, null, false);
     }

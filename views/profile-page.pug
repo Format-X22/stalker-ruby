@@ -193,10 +193,16 @@ block content
                                         +inventory('weapon/sgi.png')
                                         +inventory('weapon/spas.png')
 
-                +tab-panel('chat')
+                +tab-panel('chat').mobile-chat-tab-panel
                     .row
-                        .col-md-12
-                            p chat
+                        .col-md-12.mobile-chat-col
+                            .chat
+                                .list
+                                    #mobile-chat.msg-container
+                                .send-form
+                                    input(
+                                        type='text' placeholder='Сообщение...'
+                                    )#mobile-chat-input.form-control(rows='3')
 
     - var id = 'chara-stamina-window'
     +window(id)

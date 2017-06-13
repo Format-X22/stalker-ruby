@@ -105,6 +105,26 @@ body,
 	}
 }
 
+.mobile-chat-tab-panel {
+	height: 100%;
+
+	.container-fluid {
+		height: 100%;
+
+		.row {
+			height: 100%;
+
+			.mobile-chat-col {
+				height: 100%;
+
+				.msg-container {
+					bottom: 60px;
+				}
+			}
+		}
+	}
+}
+
 .information {
 	padding: 50px;
 
