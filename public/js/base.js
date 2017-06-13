@@ -66,14 +66,14 @@ class Base {
         return () => target.modal('show');
     }
 
-    post(url, data, success, failure, always) {
-        this.showPreloader();
+    post(url, data, success, failure, always, preloader = true) {
+        preloader && this.showPreloader();
 
         $.post(url, data)
             .done(
                 (response) => {
                     if (response.success) {
-                        success && success(response);
+                        success && success(response.data);
                     } else {
                         this.showErrorModal(response.message);
                         failure && failure(response);
@@ -88,7 +88,7 @@ class Base {
             )
             .always(
                 () => {
-                    this.hidePreloader();
+                    preloader && this.hidePreloader();
                     always && always();
                 }
             );

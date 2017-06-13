@@ -46,7 +46,6 @@ end
 
 post '/api/chat/list' do
 	content_type :json
-	check_session
 
 	count = Message.count
 	last = (params[:last] or 0).to_i
