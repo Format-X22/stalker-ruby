@@ -3,7 +3,9 @@ class Chat extends Base {
         super();
 
         this.pcChat = $('#pc-chat');
+        this.pcChatEl = this.pcChat[0];
         this.mobileChat = $('#mobile-chat');
+        this.mobileChatEl = this.mobileChat[0];
 
         this.last = 0;
         this.syncMessages();
@@ -16,6 +18,9 @@ class Chat extends Base {
             if (!data.length) {
                 return;
             }
+
+            const needPcScroll = this.needScroll(this.pcChat, this.pcChatEl);
+            const needMobileScroll = this.needScroll(this.mobileChat, this.mobileChatEl);
 
             this.last = data[data.length - 1].id || this.last;
 
@@ -54,7 +59,27 @@ class Chat extends Base {
                     ${template}
                 `);
             });
+
+            if (needPcScroll) {
+                this.scrollToBottom(this.pcChat, this.pcChatEl);
+            }
+
+            if (needMobileScroll) {
+                this.scrollToBottom(this.mobileChat, this.mobileChatEl);
+            }
         }, null, null, false);
+    }
+
+    needScroll(target, targetEl) {
+        let scrollTop = targetEl.scrollTop;
+        let innerHeight = target.innerHeight();
+        let scrollHeight = targetEl.scrollHeight;
+
+        return (scrollHeight - (scrollTop + innerHeight)) < 100;
+    }
+
+    scrollToBottom(target, targetEl) {
+        targetEl.scrollTo(0, targetEl.scrollHeight - target.innerHeight());
     }
 }
 
